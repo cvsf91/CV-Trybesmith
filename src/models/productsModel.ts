@@ -4,7 +4,7 @@ import { Product } from '../utils/types';
 
 const getAll = async (): Promise<Product[]> => {
   const [products] = await connection.execute<RowDataPacket[]>(
-    'SELECT * FROM Trybesmith.products',
+    'SELECT id, name, amount, order_id as orderId FROM Trybesmith.products',
   );
   return products as Product[];
 };

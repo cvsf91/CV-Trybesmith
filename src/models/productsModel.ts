@@ -2,9 +2,11 @@ import { RowDataPacket, ResultSetHeader } from 'mysql2';
 import connection from './connection';
 import { Product } from '../utils/types';
 
-const getAll = async () => {
-  const [products] = await connection.execute<RowDataPacket[]>('SELECT * FROM Trybesmith.products');
-  return products;
+const getAll = async (): Promise<Product[]> => {
+  const [products] = await connection.execute<RowDataPacket[]>(
+    'SELECT * FROM Trybesmith.products',
+  );
+  return products as Product[];
 };
 
 const insert = async ({ name, amount }: Product): Promise<number> => {

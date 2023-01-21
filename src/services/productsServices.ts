@@ -1,7 +1,7 @@
 import model from '../models/productsModel';
 import { Product } from '../utils/types';
 
-const getProducts = async () => {
+const getProducts = async (): Promise<Product[]> => {
   const products = await model.getAll();
   return products;
 };

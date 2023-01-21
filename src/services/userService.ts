@@ -1,9 +1,12 @@
-import { insert as create } from '../models/userModel';
+import { insert as create, getByUsername } from '../models/userModel';
 import { User } from '../utils/types';
 
-const createUser = async (user: User): Promise<number> => {
+export const createUser = async (user: User): Promise<number> => {
   const insertId = await create(user);
   return insertId;
 };
 
-export default { createUser };
+export const getUserByUsername = async (username: string): Promise<User> => {
+  const user = await getByUsername(username);
+  return user;
+};

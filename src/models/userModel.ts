@@ -19,3 +19,11 @@ export const insert = async (
   );
   return result.insertId;
 };
+
+export const getByUsername = async (username: string): Promise<User> => {
+  const [[user]] = await connection.execute<RowDataPacket[]>(
+    'SELECT * FROM Trybesmith.users WHERE username = ?',
+    [username],
+  );
+  return user as User;
+};

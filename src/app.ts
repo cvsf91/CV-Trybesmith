@@ -7,9 +7,10 @@ import validateLogin from './middlewares/login/validateLogin';
 import validateProdFields from './middlewares/products/fieldsValidation';
 import nameValidation from './middlewares/products/nameValidation';
 import amountValidation from './middlewares/products/amountValidation';
-import fieldsLengthValidation from './middlewares/user/fieldsLengthValidation';
-import fieldsTypeValidation from './middlewares/user/fieldsTypeValidation';
-import fieldsValidation from './middlewares/user/fieldsValidation';
+import usernameValidation from './middlewares/user/usernameValidation';
+import passwordValidation from './middlewares/user/passwordValidation';
+import levelValidation from './middlewares/user/levelValidation';
+import vocationValidation from './middlewares/user/vocationValidation';
 
 const app = express();
 
@@ -27,9 +28,10 @@ app.get('/products', prodController.listProducts);
 
 app.post(
   '/users',
-  fieldsValidation,
-  fieldsLengthValidation,
-  fieldsTypeValidation,
+  usernameValidation,
+  passwordValidation,
+  levelValidation,
+  vocationValidation,
   userController.createUser,
 );
 

@@ -7,6 +7,9 @@ import validateLogin from './middlewares/login/validateLogin';
 import validateProdFields from './middlewares/products/fieldsValidation';
 import nameValidation from './middlewares/products/nameValidation';
 import amountValidation from './middlewares/products/amountValidation';
+import fieldsLengthValidation from './middlewares/user/fieldsLengthValidation';
+import fieldsTypeValidation from './middlewares/user/fieldsTypeValidation';
+import fieldsValidation from './middlewares/user/fieldsValidation';
 
 const app = express();
 
@@ -22,7 +25,13 @@ app.post(
 
 app.get('/products', prodController.listProducts);
 
-app.post('/users', userController.createUser);
+app.post(
+  '/users',
+  fieldsValidation,
+  fieldsLengthValidation,
+  fieldsTypeValidation,
+  userController.createUser,
+);
 
 app.get('/orders', orderController.listOrders);
 

@@ -1,4 +1,4 @@
-import { RowDataPacket } from 'mysql2';
+import { RowDataPacket, ResultSetHeader } from 'mysql2';
 import connection from './connection';
 import { Order } from '../utils/types';
 
@@ -13,4 +13,12 @@ const getAll = async () => {
   return orders as Order[];
 };
 
-export default { getAll };
+const insert = async (userId: number) => {
+  const [resultInsert] = await connection.execute<ResultSetHeader>(`
+  INSERT INTO Trybesmith.orders (user_id)
+  VALUES (?)
+  `, [userId || null]);
+  return resultInsert;
+};
+
+export default { getAll, insert };

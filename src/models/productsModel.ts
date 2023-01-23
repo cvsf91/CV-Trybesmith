@@ -9,10 +9,10 @@ const getAll = async (): Promise<Product[]> => {
   return products as Product[];
 };
 
-const insert = async ({ name, amount }: Product): Promise<number> => {
+const insert = async ({ name, amount, orderId }: Product): Promise<number> => {
   const [result] = await connection.execute<ResultSetHeader>(
-    'INSERT INTO Trybesmith.products (name, amount) VALUES (?, ?)',
-    [name, amount],
+    'INSERT INTO Trybesmith.products (name, amount, order_id) VALUES (?, ?, ?)',
+    [name, amount, orderId || null],
   );
   return result.insertId;
 };

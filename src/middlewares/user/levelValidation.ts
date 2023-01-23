@@ -2,7 +2,6 @@ import { Request, Response, NextFunction } from 'express';
 
 export default async (req: Request, res: Response, next: NextFunction) => {
   const { level } = req.body;
-  console.log('LEVEL: ', level, typeof level);
   if (!level && level !== 0) {
     return res.status(400).json({ message: '"level" is required' });
   } if (typeof level !== 'number') {

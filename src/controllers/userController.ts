@@ -1,11 +1,12 @@
 import { Request, Response } from 'express';
-import { createUser as create } from '../services/userService';
+import { createUser as create, getUserByUsername } from '../services/user.service';
 import { encode } from '../auth/jwt';
 
 async function createUser(req: Request, res: Response) {
   try {
     await create(req.body);
-    const token = encode(req.body);  
+    const user = await getUserByUsername(req.body.username);
+    const token = encode(user);
     return res.status(201).json({ token });
   } catch (error) {
     console.log(error);

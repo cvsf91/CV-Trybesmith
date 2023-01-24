@@ -17,4 +17,20 @@ const insert = async ({ name, amount, orderId }: Product): Promise<number> => {
   return result.insertId;
 };
 
-export default { getAll, insert };
+const updateOrderId = async (orderId: number, productsList: number[]) => {
+  try {
+    const promises = productsList.map((productId: number) => connection.execute(
+      `UPDATE Trybesmith.products
+      SET order_id = ?
+      WHERE id = ?`,
+      [orderId, productId],
+    ));
+    await Promise.all(promises);
+  } catch (error: unknown) {
+    if (error instanceof Error) {
+      console.log(error);
+    }
+  }
+};
+
+export default { getAll, insert, updateOrderId };

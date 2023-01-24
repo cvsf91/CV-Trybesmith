@@ -5,7 +5,7 @@ dotenv.config();
 
 export const encode = (payload: object) => {
   const token = jwt.sign(
-    payload,
+    { data: payload },
     process.env.JWT_SECRET as string,
     { algorithm: 'HS256', expiresIn: '1d' },
   );
@@ -16,6 +16,12 @@ export const decode = (token: string) => {
   const payload = jwt.verify(
     token,
     process.env.JWT_SECRET as string,
+    (err, decoded) => {
+      if (err) {
+        return { data: { message: 'Failed to decode token' } };
+      }
+      return decoded;
+    },
   );
   
   return payload;

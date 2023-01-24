@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import service from '../services/productsServices';
+import service from '../services/products.service';
 
 async function listProducts(_req: Request, res: Response) {
   const products = await service.getProducts();

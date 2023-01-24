@@ -11,6 +11,8 @@ import usernameValidation from './middlewares/user/usernameValidation';
 import passwordValidation from './middlewares/user/passwordValidation';
 import levelValidation from './middlewares/user/levelValidation';
 import vocationValidation from './middlewares/user/vocationValidation';
+import validateToken from './middlewares/orders/validateToken';
+import validateFields from './middlewares/orders/validateFields';
 
 const app = express();
 
@@ -36,6 +38,13 @@ app.post(
 );
 
 app.get('/orders', orderController.listOrders);
+
+app.post(
+  '/orders',
+  validateToken,
+  validateFields,
+  orderController.createOrder,
+);
 
 app.post(
   '/login',

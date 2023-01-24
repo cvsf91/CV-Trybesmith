@@ -13,12 +13,12 @@ const getAll = async () => {
   return orders as Order[];
 };
 
-const insert = async (userId: number) => {
+const insert = async (userId: number): Promise<number> => {
   const [resultInsert] = await connection.execute<ResultSetHeader>(`
   INSERT INTO Trybesmith.orders (user_id)
   VALUES (?)
   `, [userId || null]);
-  return resultInsert;
+  return resultInsert.insertId;
 };
 
 export default { getAll, insert };

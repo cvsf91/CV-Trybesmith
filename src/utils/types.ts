@@ -7,6 +7,7 @@ export type Product = {
 
 export type User = {
   id?: number,
+  userId?: number,
   username: string,
   vocation: string,
   level: number,
@@ -18,3 +19,11 @@ export type Order = {
   userId: number,
   productsIds: number[],
 };
+
+export type Payload = {
+  data: {
+    [key: string]: string | number,
+  }
+};
+
+export type ProductIds = [ number, number, number ];
